@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Router = require('react-router');
 var { Route, DefaultRoute, RouteHandler, Link } = Router;
 var data = require('./data');
@@ -48,7 +49,7 @@ var CategoryNav = React.createClass({
           className={this.buildToggleClassName()}
           onClick={this.toggle}
         >{category.name}</h3>
-        <ul>{this.renderItems()}</ul>  
+        <ul>{this.renderItems()}</ul>
       </div>
     );
   }
@@ -146,5 +147,5 @@ var routes = (
 );
 
 Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.getElementById('example'));
+  ReactDOM.render(<Handler/>, document.getElementById('example'));
 });

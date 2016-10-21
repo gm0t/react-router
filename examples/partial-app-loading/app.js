@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Router = require('react-router');
 var { Route, RouteHandler, Link } = Router;
 
@@ -24,8 +25,7 @@ var AsyncElement = {
     if (Component) {
       // can't find RouteHandler in the loaded component, so we just grab
       // it here first.
-      this.props.activeRoute = <RouteHandler/>;
-      return <Component {...this.props}/>;
+      return <Component {...this.props} activeRoute={<RouteHandler/>}/>;
     }
     return this.preRender();
   }
@@ -70,5 +70,5 @@ var routes = (
 );
 
 Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.getElementById('example'));
+  ReactDOM.render(<Handler/>, document.getElementById('example'));
 });

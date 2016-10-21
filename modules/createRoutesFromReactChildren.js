@@ -1,6 +1,6 @@
 /* jshint -W084 */
 var React = require('react');
-var assign = require('react/lib/Object.assign');
+var assign = require('./assign');
 var warning = require('./warning');
 var DefaultRoute = require('./components/DefaultRoute');
 var NotFoundRoute = require('./components/NotFoundRoute');
@@ -39,8 +39,9 @@ function createRouteFromReactElement(element) {
   var type = element.type;
   var props = assign({}, type.defaultProps, element.props);
 
-  if (type.propTypes)
-    checkPropTypes(type.displayName, type.propTypes, props);
+  // removed in sake of compatibility with new react
+  // if (type.propTypes)
+  //   checkPropTypes(type.displayName, type.propTypes, props);
 
   if (type === DefaultRoute)
     return Route.createDefaultRoute(createRouteOptions(props));

@@ -1,5 +1,6 @@
 var React = require('react');
-var TransitionGroup = require('react/lib/ReactCSSTransitionGroup');
+var ReactDOM = require('react-dom');
+var TransitionGroup = require('react-addons-css-transition-group');
 var Router = require('react-router');
 var { Route, RouteHandler, Link } = Router;
 
@@ -17,7 +18,7 @@ var App = React.createClass({
           <li><Link to="page1">Page 1</Link></li>
           <li><Link to="page2">Page 2</Link></li>
         </ul>
-        <TransitionGroup component="div" transitionName="example">
+        <TransitionGroup component="div" transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
           <RouteHandler key={name}/>
         </TransitionGroup>
       </div>
@@ -55,5 +56,5 @@ var routes = (
 );
 
 Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.getElementById('example'));
+  ReactDOM.render(<Handler/>, document.getElementById('example'));
 });

@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Router = require('react-router');
 var { Route, RouteHandler, Link } = Router;
 var Rx = require('rx');
@@ -40,9 +41,9 @@ var routes = (
 );
 
 var source = Rx.Observable.fromEventPattern(function(h) {
-  Router.run(routes, h);  
+  Router.run(routes, h);
 });
 
 source.subscribe(function (Handler) {
-  React.render(<Handler/>, document.getElementById('example'));
+  ReactDOM.render(<Handler/>, document.getElementById('example'));
 });

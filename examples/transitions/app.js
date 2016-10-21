@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Router = require('react-router');
 var { Route, DefaultRoute, RouteHandler, Link } = Router;
 
@@ -36,7 +37,7 @@ var Form = React.createClass({
 
   statics: {
     willTransitionFrom: function (transition, element) {
-      if (element.refs.userInput.getDOMNode().value !== '') {
+      if (element.refs.userInput.value !== '') {
         if (!confirm('You have unsaved information, are you sure you want to leave this page?')) {
           transition.abort();
         }
@@ -46,7 +47,7 @@ var Form = React.createClass({
 
   handleSubmit: function (event) {
     event.preventDefault();
-    this.refs.userInput.getDOMNode().value = '';
+    this.refs.userInput.value = '';
     this.context.router.transitionTo('/');
   },
 
@@ -72,5 +73,5 @@ var routes = (
 );
 
 Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.getElementById('example'));
+  ReactDOM.render(<Handler/>, document.getElementById('example'));
 });

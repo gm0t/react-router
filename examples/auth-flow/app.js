@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Router = require('react-router');
 var { Route, RouteHandler, Link } = Router;
 
@@ -46,7 +47,7 @@ var requireAuth = (Component) => {
     static willTransitionTo(transition) {
       if (!auth.loggedIn()) {
         transition.redirect('/login', {}, {'nextPath' : transition.path});
-      }  
+      }
     }
     render () {
       return <Component {...this.props}/>
@@ -191,5 +192,5 @@ var routes = (
 );
 
 Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.getElementById('example'));
+  ReactDOM.render(<Handler/>, document.getElementById('example'));
 });

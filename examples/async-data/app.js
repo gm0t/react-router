@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Router = require('react-router');
 var EventEmitter = require('events').EventEmitter;
 var { Route, DefaultRoute, RouteHandler, Link } = Router;
@@ -91,6 +92,9 @@ var Contact = React.createClass({
 
   render () {
     var { contact } = this.props.data;
+    if (!contact) {
+      contact = {first: "not", last: "found"};
+    }
     return (
       <div>
         <p><Link to="/">Back</Link></p>
@@ -133,6 +137,6 @@ Router.run(routes, function (Handler, state) {
 
   fetchData(state.routes, state.params).then((data) => {
     loadingEvents.emit('loadEnd');
-    React.render(<Handler data={data}/>, document.getElementById('example'));
+    ReactDOM.render(<Handler data={data}/>, document.getElementById('example'));
   });
 });
