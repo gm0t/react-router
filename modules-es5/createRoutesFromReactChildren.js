@@ -1,6 +1,6 @@
-/* jshint -W084 */
 'use strict';
 
+/* jshint -W084 */
 var React = require('react');
 var assign = require('./assign');
 var warning = require('./warning');

@@ -1,7 +1,8 @@
-/* jshint -W058 */
 'use strict';
 
+/* jshint -W058 */
 var React = require('react');
+var createReactClass = require('create-react-class');
 var warning = require('./warning');
 var invariant = require('invariant');
 var canUseDOM = require('can-use-dom');
@@ -35,9 +36,9 @@ var DEFAULT_LOCATION = canUseDOM ? HashLocation : '/';
 var DEFAULT_SCROLL_BEHAVIOR = canUseDOM ? ImitateBrowserBehavior : null;
 
 function hasProperties(object, properties) {
-  for (var propertyName in properties) if (properties.hasOwnProperty(propertyName) && object[propertyName] !== properties[propertyName]) return false;
-
-  return true;
+  for (var propertyName in properties) {
+    if (properties.hasOwnProperty(propertyName) && object[propertyName] !== properties[propertyName]) return false;
+  }return true;
 }
 
 function hasMatch(routes, route, prevParams, nextParams, prevQuery, nextQuery) {
@@ -81,15 +82,15 @@ function routeIsActive(activeRoutes, routeName) {
 }
 
 function paramsAreActive(activeParams, params) {
-  for (var property in params) if (String(activeParams[property]) !== String(params[property])) return false;
-
-  return true;
+  for (var property in params) {
+    if (String(activeParams[property]) !== String(params[property])) return false;
+  }return true;
 }
 
 function queryIsActive(activeQuery, query) {
-  for (var property in query) if (String(activeQuery[property]) !== String(query[property])) return false;
-
-  return true;
+  for (var property in query) {
+    if (String(activeQuery[property]) !== String(query[property])) return false;
+  }return true;
 }
 
 /**
@@ -135,7 +136,7 @@ function createRouter(options) {
   // browsers that don't support the HTML history API.
   if (location === HistoryLocation && !supportsHistory()) location = RefreshLocation;
 
-  var Router = React.createClass({
+  var Router = createReactClass({
 
     displayName: 'Router',
 
@@ -366,7 +367,7 @@ function createRouter(options) {
       run: function run(callback) {
         invariant(!Router.isRunning, 'Router is already running');
 
-        dispatchHandler = function (error, transition, newState) {
+        dispatchHandler = function dispatchHandler(error, transition, newState) {
           if (error) Router.handleError(error);
 
           if (pendingTransition !== transition) return;

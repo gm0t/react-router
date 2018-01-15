@@ -27,7 +27,6 @@ function onPopState(event) {
  * A Location that uses HTML5 history.
  */
 var HistoryLocation = {
-
   addChangeListener: function addChangeListener(listener) {
     _listeners.push(listener);
 
@@ -41,7 +40,6 @@ var HistoryLocation = {
       _isListening = true;
     }
   },
-
   removeChangeListener: function removeChangeListener(listener) {
     _listeners = _listeners.filter(function (l) {
       return l !== listener;
@@ -57,28 +55,25 @@ var HistoryLocation = {
       _isListening = false;
     }
   },
-
   push: function push(path) {
     window.history.pushState({ path: path }, '', path);
     History.length += 1;
     notifyChange(LocationActions.PUSH);
   },
-
   replace: function replace(path) {
     window.history.replaceState({ path: path }, '', path);
     notifyChange(LocationActions.REPLACE);
   },
+
 
   pop: History.back,
 
   getCurrentPath: function getCurrentPath() {
     return decodeURI(window.location.pathname + window.location.search);
   },
-
   toString: function toString() {
     return '<HistoryLocation>';
   }
-
 };
 
 module.exports = HistoryLocation;

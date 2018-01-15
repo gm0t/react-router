@@ -1,8 +1,8 @@
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var assign = require('./assign');
 var invariant = require('invariant');
@@ -11,9 +11,10 @@ var PathUtils = require('./PathUtils');
 
 var _currentRoute;
 
-var Route = (function () {
+var Route = function () {
   _createClass(Route, null, [{
     key: 'createRoute',
+
 
     /**
      * Creates and returns a new route. Options may be a URL pathname string
@@ -116,6 +117,7 @@ var Route = (function () {
      * Creates and returns a route that is rendered when its parent matches
      * the current URL.
      */
+
   }, {
     key: 'createDefaultRoute',
     value: function createDefaultRoute(options) {
@@ -126,6 +128,7 @@ var Route = (function () {
      * Creates and returns a route that is rendered when its parent matches
      * the current URL but none of its siblings do.
      */
+
   }, {
     key: 'createNotFoundRoute',
     value: function createNotFoundRoute(options) {
@@ -144,6 +147,7 @@ var Route = (function () {
      * - query        The query to use in the redirect URL. Defaults
      *                to using the current query
      */
+
   }, {
     key: 'createRedirect',
     value: function createRedirect(options) {
@@ -174,6 +178,7 @@ var Route = (function () {
    * Appends the given route to this route's child routes.
    */
 
+
   _createClass(Route, [{
     key: 'appendChild',
     value: function appendChild(route) {
@@ -197,6 +202,6 @@ var Route = (function () {
   }]);
 
   return Route;
-})();
+}();
 
 module.exports = Route;

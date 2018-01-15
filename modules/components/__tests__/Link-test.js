@@ -12,11 +12,11 @@ var { click } = React.addons.TestUtils.Simulate;
 describe('A Link', function () {
   describe('with params and a query', function () {
     it('knows how to make its href', function () {
-      var LinkHandler = React.createClass({
-        render: function () {
+      class LinkHandler extends React.Component {
+        render() {
           return <Link to="foo" params={{bar: 'baz'}} query={{qux: 'quux'}}>Link</Link>;
         }
-      });
+      }
 
       var routes = [
         <Route name="foo" path="foo/:bar" handler={Foo} />,
@@ -37,8 +37,8 @@ describe('A Link', function () {
 
   describe('when its route is active', function () {
     it('has an active class name', function (done) {
-      var LinkHandler = React.createClass({
-        render: function () {
+      class LinkHandler extends React.Component {
+        render() {
           return (
             <div>
               <Link
@@ -50,7 +50,7 @@ describe('A Link', function () {
             </div>
           );
         }
-      });
+      }
 
       var routes = (
         <Route path="/" handler={LinkHandler}>
@@ -96,8 +96,8 @@ describe('A Link', function () {
     });
 
     it('has applies activeStyle', function (done) {
-      var LinkHandler = React.createClass({
-        render: function () {
+      class LinkHandler extends React.Component {
+        render() {
           return (
             <div>
               <Link
@@ -109,7 +109,7 @@ describe('A Link', function () {
             </div>
           );
         }
-      });
+      }
 
       var routes = (
         <Route path="/" handler={LinkHandler}>
@@ -157,16 +157,16 @@ describe('A Link', function () {
 
   describe('when clicked', function () {
     it('calls a user defined click handler', function (done) {
-      var LinkHandler = React.createClass({
-        handleClick: function (event) {
+      class LinkHandler extends React.Component {
+        handleClick = (event) => {
           assert.ok(true);
           done();
-        },
+        };
 
-        render: function () {
+        render() {
           return <Link to="foo" onClick={this.handleClick}>Link</Link>;
         }
-      });
+      }
 
       var routes = [
         <Route name="foo" handler={Foo} />,
@@ -186,15 +186,15 @@ describe('A Link', function () {
       var div = document.createElement('div');
       var location = new TestLocation([ '/link' ]);
 
-      var LinkHandler = React.createClass({
-        handleClick: function () {
+      class LinkHandler extends React.Component {
+        handleClick = () => {
           // just here to make sure click handlers don't prevent it from happening
-        },
+        };
 
-        render: function () {
+        render() {
           return <Link to="foo" onClick={this.handleClick}>Link</Link>;
         }
-      });
+      }
 
       var routes = [
         <Route name="foo" handler={Foo} />,

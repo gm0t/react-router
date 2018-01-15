@@ -64,10 +64,9 @@ var PathUtils = {
    * pattern does not match the given path.
    */
   extractParams: function extractParams(pattern, path) {
-    var _compilePattern = compilePattern(pattern);
-
-    var matcher = _compilePattern.matcher;
-    var paramNames = _compilePattern.paramNames;
+    var _compilePattern = compilePattern(pattern),
+        matcher = _compilePattern.matcher,
+        paramNames = _compilePattern.paramNames;
 
     var match = path.match(matcher);
 

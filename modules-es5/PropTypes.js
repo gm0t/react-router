@@ -1,7 +1,7 @@
 'use strict';
 
 var assign = require('./assign');
-var ReactPropTypes = require('react').PropTypes;
+var ReactPropTypes = require('prop-types');
 var Route = require('./Route');
 
 var PropTypes = assign({}, ReactPropTypes, {
@@ -12,6 +12,7 @@ var PropTypes = assign({}, ReactPropTypes, {
   falsy: function falsy(props, propName, componentName) {
     if (props[propName]) return new Error('<' + componentName + '> should not have a "' + propName + '" prop');
   },
+
 
   /**
    * Indicates that a prop should be a Route object.

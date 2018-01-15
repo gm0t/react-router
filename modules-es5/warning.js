@@ -23,7 +23,7 @@ var __DEV__ = process.env.NODE_ENV !== 'production';
 var warning = function warning() {};
 
 if (__DEV__) {
-  warning = function (condition, format) {
+  warning = function warning(condition, format) {
     for (var _len = arguments.length, args = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
       args[_key - 2] = arguments[_key];
     }

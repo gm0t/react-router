@@ -1,5 +1,6 @@
 var expect = require('expect');
 var React = require('react');
+var createReactClass = require('create-react-class');
 var Router = require('../index');
 var Route = require('../components/Route');
 var RouteHandler = require('../components/RouteHandler');
@@ -188,19 +189,17 @@ describe('Router', function () {
       });
 
       it('stops waiting on router.transitionTo after another asynchronous transition ended ', function (done) {
-        var LongAsync = React.createClass({
-          statics: {
-            delay: Async.delay * 2,
+        class LongAsync extends React.Component {
+          static delay = Async.delay * 2;
 
-            willTransitionTo: function (transition, params, query, callback) {
-              setTimeout(callback, LongAsync.delay);
-            }
-          },
+          static willTransitionTo(transition, params, query, callback) {
+            setTimeout(callback, LongAsync.delay);
+          }
 
-          render: function () {
+          render() {
             return <div className="Async2">Async2</div>;
           }
-        });
+        }
 
         var location = new TestLocation([ '/foo' ]);
         var routes = [
@@ -583,18 +582,16 @@ describe('Router', function () {
       });
 
       it('ignores aborting asynchronously in willTransitionTo when aborted before router.transitionTo', function (done) {
-        var AbortAsync2 = React.createClass({
-          statics: {
-            willTransitionTo: function (transition, params, query, callback) {
-              transition.abort();
-              setTimeout(callback, Async.delay);
-            }
-          },
+        class AbortAsync2 extends React.Component {
+          static willTransitionTo(transition, params, query, callback) {
+            transition.abort();
+            setTimeout(callback, Async.delay);
+          }
 
-          render: function () {
+          render() {
             return <div>Abort</div>;
           }
-        });
+        }
 
         var location = new TestLocation([ '/foo' ]);
         var routes = [
@@ -661,40 +658,36 @@ describe('Router', function () {
       var fromKnifeCalled = false;
       var fromSpoonCalled = false;
 
-      var Knife = React.createClass({
-        statics: {
-          willTransitionFrom: function () {
-            fromKnifeCalled = true;
-          }
-        },
+      class Knife extends React.Component {
+        static willTransitionFrom() {
+          fromKnifeCalled = true;
+        }
 
-        render: function () {
+        render() {
           return <RouteHandler/>;
         }
-      });
+      }
 
-      var Spoon = React.createClass({
-        statics: {
-          willTransitionTo: function (transition, params, query) {
-            if (query.filter === 'first') {
-              return; // skip first transition
-            }
-
-            expect(query.filter).toEqual('second');
-            expect(fromKnifeCalled).toBe(true);
-            expect(fromSpoonCalled).toBe(true);
-            done();
-          },
-
-          willTransitionFrom: function (transition, element) {
-            fromSpoonCalled = true;
+      class Spoon extends React.Component {
+        static willTransitionTo(transition, params, query) {
+          if (query.filter === 'first') {
+            return; // skip first transition
           }
-        },
 
-        render: function () {
+          expect(query.filter).toEqual('second');
+          expect(fromKnifeCalled).toBe(true);
+          expect(fromSpoonCalled).toBe(true);
+          done();
+        }
+
+        static willTransitionFrom(transition, element) {
+          fromSpoonCalled = true;
+        }
+
+        render() {
           return <h1>Spoon</h1>;
         }
-      });
+      }
 
       var routes = (
         <Route handler={Knife}>
@@ -717,7 +710,9 @@ describe('Router', function () {
     it('sends a component instance', function (done) {
       var div = document.createElement('div');
 
-      var Bar = React.createClass({
+      var Bar = createReactClass({
+        displayName: 'Bar',
+
         statics: {
           willTransitionFrom: function (transition, component) {
             expect(div.querySelector('#bar')).toBe(component.getDOMNode());
@@ -727,7 +722,7 @@ describe('Router', function () {
 
         render: function () {
           return <div id="bar">bar</div>;
-        }
+        },
       });
 
       var routes = (
@@ -747,34 +742,30 @@ describe('Router', function () {
     });
 
     it('should be called when Handler is rendered multiple times on same route', function (done) {
-
       var div = document.createElement('div');
 
       var counter = 0;
 
-      var Foo = React.createClass({
-        statics: {
-          willTransitionFrom: function (transition, component) {
-            counter++;
-          }
-        },
+      class Foo extends React.Component {
+        static willTransitionFrom(transition, component) {
+          counter++;
+        }
 
-        render: function () {
+        render() {
           return <div id="foo">Foo</div>;
         }
-      });
+      }
 
-      var Bar = React.createClass({
-        statics: {
-          willTransitionFrom: function (transition, component) {
-            counter++;
-          }
-        },
+      class Bar extends React.Component {
+        static willTransitionFrom(transition, component) {
+          counter++;
+        }
 
-        render: function () {
+        render() {
           return <div id="bar">Bar</div>;
         }
-      });
+      }
+
       var routes = (
         <Route handler={Nested} path='/'>
           <Route name="foo" handler={Foo}/>
@@ -963,11 +954,11 @@ describe('Router.run', function () {
   });
 
   describe('ScrollToTop scrolling', function () {
-    var BigPage = React.createClass({
-      render: function () {
+    class BigPage extends React.Component {
+      render() {
         return <div style={{ width: 10000, height: 10000, background: 'green' }}/>;
       }
-    });
+    }
 
     var routes = [
       <Route name="one" handler={BigPage}/>,
@@ -1032,11 +1023,11 @@ describe('Router.run', function () {
   });
 
   describe('ImitateBrowserBehavior scrolling', function () {
-    var BigPage = React.createClass({
-      render: function () {
+    class BigPage extends React.Component {
+      render() {
         return <div style={{ width: 10000, height: 10000, background: 'green' }}/>;
       }
-    });
+    }
 
     var routes = [
       <Route name="one" handler={BigPage}/>,

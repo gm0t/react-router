@@ -1,6 +1,6 @@
-/* jshint -W058 */
-
 'use strict';
+
+/* jshint -W058 */
 
 var Cancellation = require('./Cancellation');
 var Redirect = require('./Redirect');

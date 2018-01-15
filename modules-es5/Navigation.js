@@ -34,6 +34,7 @@ var Navigation = {
     return this.context.router.makePath(to, params, query);
   },
 
+
   /**
    * Returns a string that may safely be used as the href of a
    * link to the route with the given name.
@@ -41,6 +42,7 @@ var Navigation = {
   makeHref: function makeHref(to, params, query) {
     return this.context.router.makeHref(to, params, query);
   },
+
 
   /**
    * Transitions to the URL specified in the arguments by pushing
@@ -50,6 +52,7 @@ var Navigation = {
     this.context.router.transitionTo(to, params, query);
   },
 
+
   /**
    * Transitions to the URL specified in the arguments by replacing
    * the current URL in the history stack.
@@ -58,13 +61,13 @@ var Navigation = {
     this.context.router.replaceWith(to, params, query);
   },
 
+
   /**
    * Transitions to the previous URL.
    */
   goBack: function goBack() {
     return this.context.router.goBack();
   }
-
 };
 
 module.exports = Navigation;

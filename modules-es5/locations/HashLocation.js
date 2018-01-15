@@ -46,7 +46,6 @@ function onHashChange() {
  * A Location that uses `window.location.hash`.
  */
 var HashLocation = {
-
   addChangeListener: function addChangeListener(listener) {
     _listeners.push(listener);
 
@@ -63,7 +62,6 @@ var HashLocation = {
       _isListening = true;
     }
   },
-
   removeChangeListener: function removeChangeListener(listener) {
     _listeners = _listeners.filter(function (l) {
       return l !== listener;
@@ -79,33 +77,27 @@ var HashLocation = {
       _isListening = false;
     }
   },
-
   push: function push(path) {
     _actionType = LocationActions.PUSH;
     window.location.hash = path;
   },
-
   replace: function replace(path) {
     _actionType = LocationActions.REPLACE;
     window.location.replace(window.location.pathname + window.location.search + '#' + path);
   },
-
   pop: function pop() {
     _actionType = LocationActions.POP;
     History.back();
   },
-
   getCurrentPath: function getCurrentPath() {
     return decodeURI(
     // We can't use window.location.hash here because it's not
     // consistent across browsers - Firefox will pre-decode it!
     window.location.href.split('#')[1] || '');
   },
-
   toString: function toString() {
     return '<HashLocation>';
   }
-
 };
 
 module.exports = HashLocation;

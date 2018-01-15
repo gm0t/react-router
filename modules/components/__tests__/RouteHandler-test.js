@@ -12,14 +12,14 @@ describe('RouteHandler', function () {
     var updateComponentBeforeNextRender;
     var location = new TestLocation([ '/foo' ]);
 
-    var Root = React.createClass({
-      componentDidMount: function () {
+    class Root extends React.Component {
+      componentDidMount() {
         updateComponentBeforeNextRender = function (cb) {
           this.forceUpdate(cb);
         }.bind(this);
-      },
+      }
 
-      render: function () {
+      render() {
         return (
           <div>
             <h1>Root</h1>
@@ -27,7 +27,7 @@ describe('RouteHandler', function () {
           </div>
         );
       }
-    });
+    }
 
     var routes = (
       <Route name="root" handler={Root} path='/'>
@@ -62,11 +62,12 @@ describe('RouteHandler', function () {
   });
 
   it('renders after an update', function (done) {
-    var Nested = React.createClass({
-      componentDidMount: function () {
+    class Nested extends React.Component {
+      componentDidMount() {
         this.forceUpdate(finishTest);
-      },
-      render: function () {
+      }
+
+      render() {
         return (
           <div>
             hello
@@ -74,13 +75,13 @@ describe('RouteHandler', function () {
           </div>
         );
       }
-    });
+    }
 
-    var Foo = React.createClass({
-      render: function () {
+    class Foo extends React.Component {
+      render() {
         return <div>foo</div>;
       }
-    });
+    }
 
     var routes = (
       <Route path='/' handler={Nested}>

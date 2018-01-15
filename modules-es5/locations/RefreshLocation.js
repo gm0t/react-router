@@ -9,14 +9,13 @@ var History = require('../History');
  * support the HTML5 history API.
  */
 var RefreshLocation = {
-
   push: function push(path) {
     window.location = path;
   },
-
   replace: function replace(path) {
     window.location.replace(path);
   },
+
 
   pop: History.back,
 
@@ -25,7 +24,6 @@ var RefreshLocation = {
   toString: function toString() {
     return '<RefreshLocation>';
   }
-
 };
 
 module.exports = RefreshLocation;
